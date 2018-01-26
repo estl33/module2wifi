@@ -21,17 +21,16 @@ int main()
   int rValue = getcharRS232();
   printf("Finished getcharRS232. rValue = %d\n", rValue);
 
-//  printf("Finished init RS232\n");
-//  wValue = putcharRS232(11);
-//  printf("Finished putcharRS232. wValue = %d\n", wValue);
-//  rValue = getcharRS232();
-//  printf("Finished getcharRS232. rValue = %d\n", rValue);
-//
-//  printf("Finished init RS232\n");
-//  wValue = putcharRS232(50);
-//  printf("Finished putcharRS232. wValue = %d\n", wValue);
-//  rValue = getcharRS232();
-//  printf("Finished getcharRS232. rValue = %d\n", rValue);
+  wValue = putcharRS232(255);
+  printf("Finished putcharRS232. wValue = %d\n", wValue);
+  rValue = getcharRS232();
+  printf("Finished getcharRS232. rValue = %d\n", rValue);
+
+
+  wValue = putcharRS232(50);
+  printf("Finished putcharRS232. wValue = %d\n", wValue);
+  rValue = getcharRS232();
+  printf("Finished getcharRS232. rValue = %d\n", rValue);
 
   return 0;
 }
@@ -47,11 +46,9 @@ int main()
 void Init_RS232(void)
 {
  // set up 6850 Control Register to utilise a divide by 16 clock,
- RS232_Control = 0b00000001;
  // set RTS low, use 8 bits of data, no parity, 1 stop bit,
- RS232_Control = RS232_Control && 0b00010111;
  // transmitter interrupt disabled
- RS232_Control = RS232_Control && 0b10011111;
+ RS232_Control = 0b00010101;
  // program baud rate generator to use 115k baud
  RS232_Baud = 0x01;
 }
@@ -60,6 +57,7 @@ int putcharRS232(int c)
 {
  // poll Tx bit in 6850 status register. Wait for it to become '1'
  while(RS232_Status && 0x01 != 1){
+	 printf("RS232_Status = %#010x\n", RS232_Status);
  }
  // write 'c' to the 6850 TxData register to output the character
  RS232_TxData = c;
@@ -70,7 +68,9 @@ int getcharRS232( void )
 {
  // poll Rx bit in 6850 status register. Wait for it to become '1'
  while(RS232_Status && 0x02 != 0x02){
+	 printf("RS232_Status = %#010x\n", RS232_Status);
  }
+ printf("RS232_Status = %#010x\n", RS232_Status);
  // read received character from 6850 RxData register.
  return RS232_RxData;
 }

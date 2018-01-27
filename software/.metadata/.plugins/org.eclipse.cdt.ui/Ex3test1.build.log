@@ -1,9 +1,9 @@
-18:22:37 **** Incremental Build of configuration Nios II for project Ex3test1 ****
+19:16:57 **** Incremental Build of configuration Nios II for project Ex3test1 ****
 make all 
 Info: Building ../Ex3test1_bsp/
 C:/altera/15.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Ex3test1_bsp/
 [BSP build complete]
 [Ex3test1 build complete]
 
-18:23:31 Build Finished (took 53s.813ms)
+19:18:02 Build Finished (took 1m:5s.148ms)
 

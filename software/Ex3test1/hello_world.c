@@ -49,29 +49,30 @@ int main()
   printf("Done Sleeping!\n");
 
   while (BlueTooth_Status && 0x02 != 0x02) {
-	  printf("Waiting for TxBit to be 1 to send $$$\n");
+	  printf("Waiting for TxBit to be 1 to send $$$, current status: %#010x\n", BlueTooth_Status);
   }
   BlueTooth_TxData = "$$$";
 
   usleep(1000 * 1000 * 1);
-  printf("Done Sleeping!\n");
+  printf("Done Sleeping!, BlueTooth_Status: %#010x\n", BlueTooth_Status);
 
   while (BlueTooth_Status && 0x01 != 0x01) {
-	  printf("Waiting for RxBit to be 1 to receive $$$ result\n");
+	  printf("Waiting for RxBit to be 1 to receive $$$ result %#010b\n", BlueTooth_Status);
   }
   int c = BlueTooth_RxData;
-  printf("Char received from $$$ = %d\n", c);
+  printf("Char received from $$$ = %d, BlueTooth_Status: %#010x\n", c, BlueTooth_Status);
 
-  while (BlueTooth_Status && 0x02 != 0x02) {
-	  printf("Waiting for TxBit to be 1 to sent command\n");
+  while (BlueTooth_Status && 0x02 != 0x02)  {
+	  printf("Waiting for TxBit to be 1 to sent command %#010b\n", BlueTooth_Status);
   }
+  printf("Setting TxData:\, BlueTooth_Status: %#010x\n", BlueTooth_Status);
   BlueTooth_TxData = "SN,GordonsDevice\r\n";
 
   while (BlueTooth_Status && 0x01 != 0x01) {
-	  printf("Waiting for RxBit to be 1 to receive command result\n");
+	  printf("Waiting for RxBit to be 1 to receive command result %#010b\n", BlueTooth_Status);
   }
   c = BlueTooth_RxData;
-  printf("Char received from command = %d\n", c);
+  printf("Char received from command = %d, BlueTooth_Status: %#010x\n", c, BlueTooth_Status);
 
   return 0;
 }

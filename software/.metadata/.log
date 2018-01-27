@@ -262,3 +262,54 @@ C Model Exception: C Model Status [Element hello_world.c does not exist.]
 
 !ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:23:34.751
 !MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:35:42.342
+!MESSAGE Terminated Launch with connection: 20DE-SoC on localhost [USB-1]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:35:43.994
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:35:45.763
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:50:36.313
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:50:38.154
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:53:34.642
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:53:36.522
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:58:14.759
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 18:58:16.441
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:02:49.860
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:02:51.655
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:07:51.585
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:07:53.293
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:14:31.203
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:14:32.949
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:18:05.813
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --stop]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2018-01-26 19:18:07.582
+!MESSAGE Executing: [C:/altera/15.0/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=DE-SoC on localhost [USB-1]' --device=2 --instance=0 --go /cygdrive/z/cpen391/RealExercise3/software/Ex3test1/Ex3test1.elf]

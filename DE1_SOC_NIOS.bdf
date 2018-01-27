@@ -1817,11 +1817,6 @@ agreement for further details.
 	(pt 976 920)
 )
 (connector
-	(text "GPIO_1[32]" (rect 762 920 819 932)(font "Arial" ))
-	(pt 752 936)
-	(pt 976 936)
-)
-(connector
 	(text "GPIO_0[11]" (rect 762 936 819 948)(font "Arial" ))
 	(pt 752 952)
 	(pt 976 952)
@@ -1989,6 +1984,11 @@ agreement for further details.
 	(pt 1472 1104)
 	(pt 1568 1104)
 	(bus)
+)
+(connector
+	(text "GPIO_1[32]" (rect 762 920 819 932)(font "Arial" ))
+	(pt 976 936)
+	(pt 752 936)
 )
 (junction (pt 664 296))
 (junction (pt 696 312))

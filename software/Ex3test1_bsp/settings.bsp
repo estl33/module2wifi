@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>25-Jan-2018 5:37:31 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1516930651372</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Users\esther86220\Desktop\CurrentCourses\CPEN391\Exercises\E3\NIOS_II_System_391_For_Students\software\Ex3test1_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>26-Jan-2018 5:24:06 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1517016246622</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>Z:\cpen391\RealExercise3\software\Ex3test1_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\nios_system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>

@@ -4,6 +4,14 @@
 #define RS232_RxData (*(volatile unsigned char *)(0x84000202))
 #define RS232_Baud 	(*(volatile unsigned char *)(0x84000204))
 
+
+#define BlueTooth_Control (*(volatile unsigned char *)(0x84000220))
+#define BlueTooth_Status (*(volatile unsigned char *)(0x84000220))
+#define BlueTooth_TxData (*(volatile unsigned char *)(0x84000222))
+#define BlueTooth_RxData (*(volatile unsigned char *)(0x84000222))
+#define BlueTooth_Baud 	(*(volatile unsigned char *)(0x84000224))
+
+#include <time.h>
 #include <stdio.h>
 
 void Init_RS232(void);
@@ -26,11 +34,44 @@ int main()
   rValue = getcharRS232();
   printf("Finished getcharRS232. rValue = %d\n", rValue);
 
-
   wValue = putcharRS232(50);
   printf("Finished putcharRS232. wValue = %d\n", wValue);
   rValue = getcharRS232();
   printf("Finished getcharRS232. rValue = %d\n", rValue);
+
+  // BlueTooth
+  // Initialize BlueTooth
+  BlueTooth_Control = 0b00010100;
+  BlueTooth_Baud = 0x01;
+
+  // wait 1 second
+  usleep(1000 * 1000 * 1);
+  printf("Done Sleeping!\n");
+
+  while (BlueTooth_Status && 0x02 != 0x02) {
+	  printf("Waiting for TxBit to be 1 to send $$$\n");
+  }
+  BlueTooth_TxData = "$$$";
+
+  usleep(1000 * 1000 * 1);
+  printf("Done Sleeping!\n");
+
+  while (BlueTooth_Status && 0x01 != 0x01) {
+	  printf("Waiting for RxBit to be 1 to receive $$$ result\n");
+  }
+  int c = BlueTooth_RxData;
+  printf("Char received from $$$ = %d\n", c);
+
+  while (BlueTooth_Status && 0x02 != 0x02) {
+	  printf("Waiting for TxBit to be 1 to sent command\n");
+  }
+  BlueTooth_TxData = "SN,GordonsDevice\r\n";
+
+  while (BlueTooth_Status && 0x01 != 0x01) {
+	  printf("Waiting for RxBit to be 1 to receive command result\n");
+  }
+  c = BlueTooth_RxData;
+  printf("Char received from command = %d\n", c);
 
   return 0;
 }
@@ -56,7 +97,7 @@ void Init_RS232(void)
 int putcharRS232(int c)
 {
  // poll Tx bit in 6850 status register. Wait for it to become '1'
- while(RS232_Status && 0x01 != 1){
+ while(RS232_Status && 0x02 != 0x02){
 	 printf("RS232_Status = %#010x\n", RS232_Status);
  }
  // write 'c' to the 6850 TxData register to output the character
@@ -67,7 +108,7 @@ int putcharRS232(int c)
 int getcharRS232( void )
 {
  // poll Rx bit in 6850 status register. Wait for it to become '1'
- while(RS232_Status && 0x02 != 0x02){
+ while(RS232_Status && 0x01 != 0x01){
 	 printf("RS232_Status = %#010x\n", RS232_Status);
  }
  printf("RS232_Status = %#010x\n", RS232_Status);

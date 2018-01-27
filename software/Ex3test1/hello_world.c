@@ -19,8 +19,13 @@ int putcharRS232(int c);
 int getcharRS232( void );
 int RS232TestForReceivedData(void);
 
+int putcharBlueTooth(int c);
+int getcharBlueTooth( void );
+void sendStringBlueTooth(char str[], int length);
+
 int main()
 {
+	/*
   printf("Hello from Nios II!\n");
   Init_RS232();
   printf("Finished init RS232\n");
@@ -38,43 +43,54 @@ int main()
   printf("Finished putcharRS232. wValue = %d\n", wValue);
   rValue = getcharRS232();
   printf("Finished getcharRS232. rValue = %d\n", rValue);
-
+*/
   // BlueTooth
   // Initialize BlueTooth
-  BlueTooth_Control = 0b00010100;
+  BlueTooth_Control = 0b00010101;
   BlueTooth_Baud = 0x01;
 
   // wait 1 second
   usleep(1000 * 1000 * 1);
   printf("Done Sleeping!\n");
 
-  while (BlueTooth_Status && 0x02 != 0x02) {
-	  printf("Waiting for TxBit to be 1 to send $$$, current status: %#010x\n", BlueTooth_Status);
-  }
-  BlueTooth_TxData = "$$$";
+//  putcharBlueTooth('$');
+//  putcharBlueTooth('$');
+//  putcharBlueTooth('$');
+
+  sendStringBlueTooth("$$$", 3);
 
   usleep(1000 * 1000 * 1);
-  printf("Done Sleeping!, BlueTooth_Status: %#010x\n", BlueTooth_Status);
+  printf("Done Sleeping!\n");
 
-  while (BlueTooth_Status && 0x01 != 0x01) {
-	  printf("Waiting for RxBit to be 1 to receive $$$ result %#010b\n", BlueTooth_Status);
-  }
-  int c = BlueTooth_RxData;
-  printf("Char received from $$$ = %d, BlueTooth_Status: %#010x\n", c, BlueTooth_Status);
+//  putcharBlueTooth('S');
+//  putcharBlueTooth('F');
+//  putcharBlueTooth(',');
+//  putcharBlueTooth('G');
+//  putcharBlueTooth('\\');
+//  putcharBlueTooth('r');
+//  putcharBlueTooth('\\');
+//  putcharBlueTooth('n');
 
-  while (BlueTooth_Status && 0x02 != 0x02)  {
-	  printf("Waiting for TxBit to be 1 to sent command %#010b\n", BlueTooth_Status);
-  }
-  printf("Setting TxData:\, BlueTooth_Status: %#010x\n", BlueTooth_Status);
-  BlueTooth_TxData = "SN,GordonsDevice\r\n";
+  getcharBlueTooth();
 
-  while (BlueTooth_Status && 0x01 != 0x01) {
-	  printf("Waiting for RxBit to be 1 to receive command result %#010b\n", BlueTooth_Status);
-  }
-  c = BlueTooth_RxData;
-  printf("Char received from command = %d, BlueTooth_Status: %#010x\n", c, BlueTooth_Status);
+//  putcharBlueTooth('-');
+//  putcharBlueTooth('-');
+//  putcharBlueTooth('-');
+//  putcharBlueTooth('\\');
+//  putcharBlueTooth('r');
+//  putcharBlueTooth('\\');
+//  putcharBlueTooth('n');
+
+  sendStringBlueTooth("---\\r\\n", 7);
 
   return 0;
+}
+
+void sendStringBlueTooth(char str[], int length) {
+	int i = 0;
+	for (i = 0; i < length; i++) {
+		putcharBlueTooth(str[i]);
+	}
 }
 
 /**************************************************************************
@@ -98,7 +114,7 @@ void Init_RS232(void)
 int putcharRS232(int c)
 {
  // poll Tx bit in 6850 status register. Wait for it to become '1'
- while(RS232_Status && 0x02 != 0x02){
+ while(RS232_Status & 0x02 != 0x02){
 	 printf("RS232_Status = %#010x\n", RS232_Status);
  }
  // write 'c' to the 6850 TxData register to output the character
@@ -109,7 +125,7 @@ int putcharRS232(int c)
 int getcharRS232( void )
 {
  // poll Rx bit in 6850 status register. Wait for it to become '1'
- while(RS232_Status && 0x01 != 0x01){
+ while(RS232_Status & 0x01 != 0x01){
 	 printf("RS232_Status = %#010x\n", RS232_Status);
  }
  printf("RS232_Status = %#010x\n", RS232_Status);
@@ -123,7 +139,35 @@ int getcharRS232( void )
 int RS232TestForReceivedData(void)
 {
  // Test Rx bit in 6850 serial comms chip status register
- int Rxbit = RS232_Status && 0x01;
+ int Rxbit = RS232_Status & 0x01;
  // if RX bit is set, return TRUE, otherwise return FALSE
  return (Rxbit == 1);
+}
+
+int putcharBlueTooth(int c)
+{
+	printf("PutChar: %c\n", c);
+ // poll Tx bit in 6850 status register. Wait for it to become '1'
+	printf("PutChar BlueTooth_Status 1 = %#010x\n", BlueTooth_Status);
+ while((BlueTooth_Status & 0x02) % 4 == 0){
+	 printf("PutChar BlueTooth_Status 2 = %#010x\n", BlueTooth_Status);
+ }
+ printf("PutChar BlueTooth_Status 3 = %#010x\n", BlueTooth_Status);
+ // write 'c' to the 6850 TxData register to output the character
+ BlueTooth_TxData = c;
+ return c ; // return c
+}
+
+int getcharBlueTooth( void )
+{
+ // poll Rx bit in 6850 status register. Wait for it to become '1'
+printf("GetCharBlueTooth 1 BlueTooth_Status = %#010x\n", BlueTooth_Status);
+ while((BlueTooth_Status & 0x01) % 2 == 0){
+	 printf("GetCharBlueTooth 2 = %#010x\n", BlueTooth_Status);
+ }
+ printf("GetCharBlueTooth 3 = %#010x\n", BlueTooth_Status);
+ // read received character from 6850 RxData register.
+ int c = BlueTooth_RxData;
+ printf("GetCharBluetooth: %c, %#010x\n", c, c);
+ return c;
 }

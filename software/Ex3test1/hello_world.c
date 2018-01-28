@@ -50,72 +50,89 @@ int main()
   // Initialize BlueTooth
   Init_BlueTooth();
 
-  // wait 1 second
-//  usleep(1000 * 1000 * 1);
-//  printf("Done Sleeping!\n");
-//  sendStringBlueTooth("$$$");
-//  usleep(1000 * 1000 * 1);
-//  printf("Done Sleeping!\n");
-//
-//  sendStringBlueTooth("SF,1\r\n");
-//  sendStringBlueTooth("R,1\r\n");
-
+  // Enter command mode with $$$, these do not need \r\n.
+  // Wait 1 second before and after calling it
   usleep(1000 * 1000 * 1);
   printf("Done Sleeping!\n");
   sendStringBlueTooth("$$$");
   usleep(1000 * 1000 * 1);
   printf("Done Sleeping!\n");
 
-  sendStringBlueTooth("SA,4\r\n");
-  sendStringBlueTooth("SN,Gord1\r\n");
-  sendStringBlueTooth("SP,0123\r\n");
+  // Send commands:
+  // If not the last command, only send \r. If you add \n the rest of the commands may not work
+  // Set authorization to 4, this makes it so your phone will be asked for a pin
+  sendStringBlueTooth("SA,4\r");
+  // Set the device name
+  sendStringBlueTooth("SN,Gord5\r");
+  // Set the pin
+  sendStringBlueTooth("SP,9999\r");
+
+  // This is superstitious 1 second waiting... might not be needed
+  usleep(1000 * 1000 * 1);
+
+  // Reboot the chip so the changes will show up
   sendStringBlueTooth("R,1\r\n");
+
+  // This is not needed right now, but should be used if one wants to exit command mode without rebooting
 //  sendStringBlueTooth("---\r");
 
   return 0;
 }
 
+// Initializes the BlueTooth Control register to 115k baud, 8 bits, no parity, 1 stop bit, 16 divisor
 void Init_BlueTooth(void) {
 	BlueTooth_Control = 0b00010101;
 	BlueTooth_Baud = 0x01;
 }
 
+// Sends str, which should be a pointer to an array of characters to the bluetooth chip
 void sendStringBlueTooth(char* str) {
 	char *c = str;
+	// iterate until end of str
 	while (*c != '\0') {
+		// add 2ms delay between sending characters
 		usleep(1000 * 2);
+		// send the character
 		putcharBlueTooth(*c);
 		c++;
 		usleep(1000 * 2);
 	}
 }
 
+// Waits for BlueTooth_Status TxBit to be 1 and puts c into BlueTooth_TxData
 int putcharBlueTooth(int c)
 {
 	printf("PutChar: %c, %d\n", c, c);
- // poll Tx bit in 6850 status register. Wait for it to become '1'
 	printf("PutChar BlueTooth_Status 1 = %#010x\n", BlueTooth_Status);
- while((BlueTooth_Status & 0x02) % 4 == 0){
-	 printf("PutChar BlueTooth_Status 2 = %#010x\n", BlueTooth_Status);
- }
- printf("PutChar BlueTooth_Status 3 = %#010x\n", BlueTooth_Status);
- // write 'c' to the 6850 TxData register to output the character
- BlueTooth_TxData = c;
- return c ; // return c
+
+	 // poll Tx bit in 6850 status register. Wait for it to become '1'
+	while((BlueTooth_Status & 0x02) % 4 == 0){
+		printf("PutChar BlueTooth_Status 2 = %#010x\n", BlueTooth_Status);
+	}
+
+	printf("PutChar BlueTooth_Status 3 = %#010x\n", BlueTooth_Status);
+
+	// write 'c' to the 6850 TxData register to output the character
+	BlueTooth_TxData = c;
+	return c ; // return c
 }
 
+// Waits for BlueTooth_Status RxBit to be 1 and reads from BlueTooth_RxData
 int getcharBlueTooth( void )
 {
- // poll Rx bit in 6850 status register. Wait for it to become '1'
-printf("GetCharBlueTooth 1 BlueTooth_Status = %#010x\n", BlueTooth_Status);
- while((BlueTooth_Status & 0x01) % 2 == 0){
-	 printf("GetCharBlueTooth 2 = %#010x\n", BlueTooth_Status);
- }
- printf("GetCharBlueTooth 3 = %#010x\n", BlueTooth_Status);
- // read received character from 6850 RxData register.
- int c = BlueTooth_RxData;
- printf("GetCharBluetooth: %c, %#010x\n", c, c);
- return c;
+	printf("GetCharBlueTooth 1 BlueTooth_Status = %#010x\n", BlueTooth_Status);
+
+	// poll Rx bit in 6850 status register. Wait for it to become '1'
+	while((BlueTooth_Status & 0x01) % 2 == 0){
+		printf("GetCharBlueTooth 2 = %#010x\n", BlueTooth_Status);
+	}
+
+	printf("GetCharBlueTooth 3 = %#010x\n", BlueTooth_Status);
+
+	// read received character from 6850 RxData register.
+	int c = BlueTooth_RxData;
+	printf("GetCharBluetooth: %c, %#010x\n", c, c);
+	return c;
 }
 
 /**************************************************************************

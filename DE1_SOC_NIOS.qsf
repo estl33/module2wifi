@@ -964,6 +964,26 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
 set_global_assignment -name FITTER_EFFORT "AUTO FIT"
+set_global_assignment -name BSF_FILE sound/sound.bsf
+set_global_assignment -name SYSTEMVERILOG_FILE sound/sound.sv
+set_global_assignment -name VERILOG_FILE sound/s_memory2.v
+set_global_assignment -name QIP_FILE sound/s_memory2.qip
+set_global_assignment -name SOURCE_FILE sound/s_memory2.cmp
+set_global_assignment -name SYSTEMVERILOG_FILE sound/flash_reader_task5.sv
+set_global_assignment -name QXP_FILE sound/flash.qxp
+set_global_assignment -name VERILOG_FILE sound/clock_generator.v
+set_global_assignment -name VERILOG_FILE sound/audio_codec.v
+set_global_assignment -name VERILOG_FILE sound/audio_and_video_config.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_SYNC_FIFO.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_Slow_Clock_Generator.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_I2C_LCM_Auto_Initialize.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_I2C_DC_Auto_Initialize.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_I2C_AV_Auto_Initialize.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_I2C.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_Clock_Edge.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_Audio_Out_Serializer.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_Audio_In_Deserializer.v
+set_global_assignment -name VERILOG_FILE sound/Altera_UP_Audio_Bit_Counter.v
 set_global_assignment -name SOURCE_FILE software/Ex3test1/hello_world.c
 set_global_assignment -name VHDL_FILE Register3Bit.vhd
 set_global_assignment -name VHDL_FILE ACIA_TX.vhd
@@ -993,4 +1013,13 @@ set_global_assignment -name SOURCE_FILE DE1_SOC_NIOS.qsf
 set_global_assignment -name BDF_FILE ACIA_BaudRate_Generator.bdf
 set_global_assignment -name BDF_FILE OnChipM68xxIO.bdf
 set_global_assignment -name VHDL_FILE M68xxIODecoder.vhd
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name STRATIXV_CONFIGURATION_SCHEME "ACTIVE SERIAL X1"
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN ON
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name ACTIVE_SERIAL_CLOCK FREQ_100MHZ
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

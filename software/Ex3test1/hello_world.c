@@ -27,7 +27,7 @@ void sendCommand(char* str);
 
 int main()
 {
-	/*
+
   printf("Hello from Nios II!\n");
   Init_RS232();
   printf("Finished init RS232\n");
@@ -45,7 +45,7 @@ int main()
   printf("Finished putcharRS232. wValue = %d\n", wValue);
   rValue = getcharRS232();
   printf("Finished getcharRS232. rValue = %d\n", rValue);
-*/
+/*
   // BlueTooth
   // Initialize BlueTooth
   Init_BlueTooth();
@@ -63,7 +63,7 @@ int main()
   // Set authorization to 4, this makes it so your phone will be asked for a pin
   sendStringBlueTooth("SA,4\r");
   // Set the device name
-  sendStringBlueTooth("SN,Gord5\r");
+  sendStringBlueTooth("SN,Gord7\r");
   // Set the pin
   sendStringBlueTooth("SP,9999\r");
 
@@ -75,7 +75,7 @@ int main()
 
   // This is not needed right now, but should be used if one wants to exit command mode without rebooting
 //  sendStringBlueTooth("---\r");
-
+*/
   return 0;
 }
 

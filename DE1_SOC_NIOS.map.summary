@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Wed Jan 31 20:12:49 2018
+Analysis & Synthesis Status : Successful - Thu Feb 01 10:04:43 2018
 Quartus II 64-Bit Version : 15.0.2 Build 153 07/15/2015 SJ Full Version
 Revision Name : DE1_SOC_NIOS
 Top-level Entity Name : DE1_SOC_NIOS
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 4327
+Total registers : 4453
 Total pins : 217
 Total virtual pins : 0
 Total block memory bits : 3,206,784

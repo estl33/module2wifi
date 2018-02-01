@@ -1,4 +1,4 @@
-Warning (10268): Verilog HDL information at sound.sv(111): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at sound.sv(126): always construct contains both blocking and non-blocking assignments
 Warning (10268): Verilog HDL information at flash_reader_task5.sv(58): always construct contains both blocking and non-blocking assignments
 Info (10281): Verilog HDL Declaration information at altera_merlin_burst_adapter_new.sv(139): object "BYTE_TO_WORD_SHIFT" differs only in case from object "byte_to_word_shift" in the same scope
 Info (10281): Verilog HDL Declaration information at altera_wrap_burst_converter.sv(279): object "addr_incr" differs only in case from object "ADDR_INCR" in the same scope

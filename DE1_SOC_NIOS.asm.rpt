@@ -1,5 +1,5 @@
 Assembler report for DE1_SOC_NIOS
-Tue Jan 30 13:14:13 2018
+Wed Jan 31 20:19:49 2018
 Quartus II 64-Bit Version 15.0.2 Build 153 07/15/2015 SJ Full Version
 
 
@@ -40,7 +40,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Tue Jan 30 13:14:13 2018 ;
+; Assembler Status      ; Successful - Wed Jan 31 20:19:49 2018 ;
 ; Revision Name         ; DE1_SOC_NIOS                          ;
 ; Top-level Entity Name ; DE1_SOC_NIOS                          ;
 ; Family                ; Cyclone V                             ;
@@ -82,8 +82,8 @@ agreement for further details.
 ; Option         ; Setting                                            ;
 +----------------+----------------------------------------------------+
 ; Device         ; 5CSEMA5F31C6                                       ;
-; JTAG usercode  ; 0x0920E920                                         ;
-; Checksum       ; 0x0920E920                                         ;
+; JTAG usercode  ; 0x0923CA81                                         ;
+; Checksum       ; 0x0923CA81                                         ;
 +----------------+----------------------------------------------------+
 
 
@@ -94,7 +94,7 @@ agreement for further details.
 +--------------------+------------------------------------------------+
 ; Device             ; EPCS128                                        ;
 ; JTAG usercode      ; 0x00000000                                     ;
-; Checksum           ; 0xDD98FA69                                     ;
+; Checksum           ; 0xDDABE222                                     ;
 ; Compression Ratio  ; 2                                              ;
 +--------------------+------------------------------------------------+
 
@@ -105,13 +105,13 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 15.0.2 Build 153 07/15/2015 SJ Full Version
-    Info: Processing started: Tue Jan 30 13:13:39 2018
+    Info: Processing started: Wed Jan 31 20:19:17 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off DE1_SOC_NIOS -c DE1_SOC_NIOS
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 953 megabytes
-    Info: Processing ended: Tue Jan 30 13:14:14 2018
-    Info: Elapsed time: 00:00:35
-    Info: Total CPU time (on all processors): 00:00:21
+    Info: Peak virtual memory: 949 megabytes
+    Info: Processing ended: Wed Jan 31 20:19:50 2018
+    Info: Elapsed time: 00:00:33
+    Info: Total CPU time (on all processors): 00:00:22
 
 

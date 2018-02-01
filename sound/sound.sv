@@ -108,11 +108,28 @@ end
 	
 integer loopnumber;	
 	
+wire pause;
+assign pause = ~KEY[1];
+reg should_pause;
+
+always_ff @(posedge pause, posedge reset)
+	if (reset == 1'b1) begin
+		should_pause = 0;
+	end else if (pause == 1'b1) begin
+		if (should_pause == 1'b1) begin
+			should_pause = 0;
+		end else begin
+			should_pause = 1'b1;
+		end //endif should_pause
+	end //endif
+	
 always_ff @(posedge CLOCK_50, posedge reset)
    if (reset == 1'b1) begin
          state <= state_init;
          write_s <= 1'b0;
-   end else begin
+	end else if (should_pause == 1'b1) begin
+		// do nothing
+	end else begin
       case (state)
 		state_init: begin
 			flash_mem_address = 23'b00000000000000000000000;

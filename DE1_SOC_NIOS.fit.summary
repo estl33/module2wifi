@@ -1,12 +1,12 @@
-Fitter Status : Successful - Tue Jan 30 13:13:16 2018
+Fitter Status : Successful - Wed Jan 31 20:18:53 2018
 Quartus II 64-Bit Version : 15.0.2 Build 153 07/15/2015 SJ Full Version
 Revision Name : DE1_SOC_NIOS
 Top-level Entity Name : DE1_SOC_NIOS
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 3,606 / 32,070 ( 11 % )
-Total registers : 4642
+Logic utilization (in ALMs) : 3,654 / 32,070 ( 11 % )
+Total registers : 4618
 Total pins : 217 / 457 ( 47 % )
 Total virtual pins : 0
 Total block memory bits : 3,201,152 / 4,065,280 ( 79 % )

@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>31-Jan-2018 8:22:56 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1517458976952</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>8-Feb-2018 1:13:53 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1518124433914</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>Z:\cpen391\RealExercise3\software\Ex3test1_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\nios_system.sopcinfo</SopcDesignFile>
@@ -886,6 +886,18 @@
                 <Enabled>false</Enabled>
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
+        <MemoryMap>
+                <slaveDescriptor>sound_out</slaveDescriptor>
+                <addressRange>0x00000000 - 0x0000000F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>sound_in</slaveDescriptor>
+                <addressRange>0x00000010 - 0x0000001F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>switches</slaveDescriptor>
                 <addressRange>0x00002000 - 0x0000200F</addressRange>

@@ -31,7 +31,9 @@
 			sdram_ras_n         : out   std_logic;                                        -- ras_n
 			sdram_we_n          : out   std_logic;                                        -- we_n
 			sdram_clk_clk       : out   std_logic;                                        -- clk
-			switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X')  -- export
+			switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
+			sound_in_export     : in    std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			sound_out_export    : out   std_logic_vector(15 downto 0)                     -- export
 		);
 	end component nios_system;
 
@@ -68,6 +70,8 @@
 			sdram_ras_n         => CONNECTED_TO_sdram_ras_n,         --             .ras_n
 			sdram_we_n          => CONNECTED_TO_sdram_we_n,          --             .we_n
 			sdram_clk_clk       => CONNECTED_TO_sdram_clk_clk,       --    sdram_clk.clk
-			switches_export     => CONNECTED_TO_switches_export      --     switches.export
+			switches_export     => CONNECTED_TO_switches_export,     --     switches.export
+			sound_in_export     => CONNECTED_TO_sound_in_export,     --     sound_in.export
+			sound_out_export    => CONNECTED_TO_sound_out_export     --    sound_out.export
 		);
 

@@ -11,6 +11,9 @@
 #define BlueTooth_RxData (*(volatile unsigned char *)(0x84000222))
 #define BlueTooth_Baud 	(*(volatile unsigned char *)(0x84000224))
 
+#define Sound_In (volatile signed short*) 0x0000010
+#define Sound_Out (volatile signed short*) 0x0000000
+
 #include <time.h>
 #include <stdio.h>
 
@@ -45,6 +48,10 @@ int main()
   printf("Finished putcharRS232. wValue = %d\n", wValue);
   rValue = getcharRS232();
   printf("Finished getcharRS232. rValue = %d\n", rValue);
+
+  while(1) {
+	  *Sound_Out = *Sound_In;
+  }
 /*
   // BlueTooth
   // Initialize BlueTooth

@@ -1,11 +1,14 @@
 module sound (CLOCK_50, CLOCK2_50, KEY,
          AUD_DACLRCK, AUD_ADCLRCK, AUD_BCLK,AUD_ADCDAT,
-			FPGA_I2C_SDAT, FPGA_I2C_SCLK,AUD_DACDAT,AUD_XCK, SW);
+			FPGA_I2C_SDAT, FPGA_I2C_SCLK,AUD_DACDAT,AUD_XCK, SW, sound_in, sound_out);
 			
 input CLOCK_50,CLOCK2_50,AUD_DACLRCK, AUD_ADCLRCK, AUD_BCLK,AUD_ADCDAT;
 input [3:0] KEY;
 inout FPGA_I2C_SDAT;
 output FPGA_I2C_SCLK,AUD_DACDAT,AUD_XCK;
+
+input signed [15:0] sound_in;
+output signed [15:0] sound_out;
 
 // Define an enumerated type for our state machine
 
@@ -209,15 +212,15 @@ always_ff @(posedge CLOCK_50, posedge reset)
 					// divide sample by 64 to lower volume
 					sample = sample/64;
 					
-					
+					sound_out <= sample;
                 // send the sample to the core (it is added to the two FIFOs
                 // as explained in the handout.  We need to be sure to send data
 					 // to both the right and left queue.  Since we are only playing a
 					 // mono sound (not stereo) we send the same sample to both FIFOs.
 					 // You will do the same in your implementation in the final task.
 					 
-				    writedata_right <= sample;
-				    writedata_left <= sample;
+				    writedata_right <= sound_in;
+				    writedata_left <= sound_in;
 			       write_s <= 1'b1;  // indicate we are writing a value
                 state <= state_wait_for_accepted;
 				   end // state_send_sample
@@ -278,3 +281,4 @@ always_ff @(posedge CLOCK_50, posedge reset)
      end  // if 
 
 endmodule
+

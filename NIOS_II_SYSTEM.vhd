@@ -50,6 +50,10 @@ ENTITY NIOS_II_SYSTEM IS
 		-- 3 push buttons
 		Push_Buttons   : in    std_logic_vector(2 downto 0)  := (others => 'X');  -- export
 		
+		-- Sound Equalization
+		Sound_in			: in    std_logic_vector(15 downto 0) := (others => '0');
+		Sound_out 		: out   std_logic_vector(15 downto 0);
+		
 		-- Hex Display
 		Hex0_1			: out   std_logic_vector(7 downto 0) ;
 		Hex2_3			: out   std_logic_vector(7 downto 0) ;
@@ -95,11 +99,13 @@ ARCHITECTURE NIOS_II_SYSTEM_rtl OF NIOS_II_SYSTEM IS
 		lcd_data_ON         : out   std_logic;                                        -- ON
       lcd_data_BLON       : out   std_logic;   		 										   -- Backlight ON
 
-
+		-- Sound Equalization
+		sound_in_export     : in    std_logic_vector(15 downto 0) := (others => '0'); --     sound_in.export
+		sound_out_export    : out   std_logic_vector(15 downto 0);      
 
 		-- Push button signals
 		push_buttons_export 	  : in    std_logic_vector(2 downto 0)  := (others => 'X'); -- export
-
+		
 		-- Hex display signals
 		hex0_1_export          : out   std_logic_vector(7 downto 0);                     -- export
 		hex2_3_export          : out   std_logic_vector(7 downto 0);                     -- export
@@ -151,6 +157,9 @@ BEGIN
       lcd_data_BLON => lcd_BLON,
 		
 		push_buttons_export 	=> Push_Buttons,
+
+		sound_in_export => Sound_in,
+		sound_out_export => Sound_out,
 		
 		hex0_1_export 			=> Hex0_1,
 		hex2_3_export 			=> Hex2_3,

@@ -30,6 +30,8 @@
 		.sdram_ras_n         (<connected-to-sdram_ras_n>),         //             .ras_n
 		.sdram_we_n          (<connected-to-sdram_we_n>),          //             .we_n
 		.sdram_clk_clk       (<connected-to-sdram_clk_clk>),       //    sdram_clk.clk
-		.switches_export     (<connected-to-switches_export>)      //     switches.export
+		.switches_export     (<connected-to-switches_export>),     //     switches.export
+		.sound_in_export     (<connected-to-sound_in_export>),     //     sound_in.export
+		.sound_out_export    (<connected-to-sound_out_export>)     //    sound_out.export
 	);
 

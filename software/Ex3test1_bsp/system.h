@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_qsys_0' in SOPC Builder design 'nios_system'
  * SOPC Builder design path: ../../nios_system.sopcinfo
  *
- * Generated: Fri Jan 26 17:24:18 PST 2018
+ * Generated: Thu Feb 08 13:14:06 PST 2018
  */
 
 /*
@@ -382,6 +382,60 @@
 #define SDRAM_T_RFC 70.0
 #define SDRAM_T_RP 15.0
 #define SDRAM_T_WR 14.0
+
+
+/*
+ * sound_in configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sound_in altera_avalon_pio
+#define SOUND_IN_BASE 0x10
+#define SOUND_IN_BIT_CLEARING_EDGE_REGISTER 0
+#define SOUND_IN_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SOUND_IN_CAPTURE 0
+#define SOUND_IN_DATA_WIDTH 16
+#define SOUND_IN_DO_TEST_BENCH_WIRING 0
+#define SOUND_IN_DRIVEN_SIM_VALUE 0
+#define SOUND_IN_EDGE_TYPE "NONE"
+#define SOUND_IN_FREQ 50000000
+#define SOUND_IN_HAS_IN 1
+#define SOUND_IN_HAS_OUT 0
+#define SOUND_IN_HAS_TRI 0
+#define SOUND_IN_IRQ -1
+#define SOUND_IN_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SOUND_IN_IRQ_TYPE "NONE"
+#define SOUND_IN_NAME "/dev/sound_in"
+#define SOUND_IN_RESET_VALUE 0
+#define SOUND_IN_SPAN 16
+#define SOUND_IN_TYPE "altera_avalon_pio"
+
+
+/*
+ * sound_out configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sound_out altera_avalon_pio
+#define SOUND_OUT_BASE 0x0
+#define SOUND_OUT_BIT_CLEARING_EDGE_REGISTER 0
+#define SOUND_OUT_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SOUND_OUT_CAPTURE 0
+#define SOUND_OUT_DATA_WIDTH 16
+#define SOUND_OUT_DO_TEST_BENCH_WIRING 0
+#define SOUND_OUT_DRIVEN_SIM_VALUE 0
+#define SOUND_OUT_EDGE_TYPE "NONE"
+#define SOUND_OUT_FREQ 50000000
+#define SOUND_OUT_HAS_IN 0
+#define SOUND_OUT_HAS_OUT 1
+#define SOUND_OUT_HAS_TRI 0
+#define SOUND_OUT_IRQ -1
+#define SOUND_OUT_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SOUND_OUT_IRQ_TYPE "NONE"
+#define SOUND_OUT_NAME "/dev/sound_out"
+#define SOUND_OUT_RESET_VALUE 0
+#define SOUND_OUT_SPAN 16
+#define SOUND_OUT_TYPE "altera_avalon_pio"
 
 
 /*

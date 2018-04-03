@@ -138,11 +138,14 @@ architecture bhvr of GraphicsController is
 	constant DrawLine6			 	 				: Std_Logic_Vector(7 downto 0) := X"10";		-- State for drawing any line
 	constant DrawLine7			 	 				: Std_Logic_Vector(7 downto 0) := X"11";		-- State for drawing any line
 	constant DrawLine8			 	 				: Std_Logic_Vector(7 downto 0) := X"12";		-- State for drawing any line
-	constant DrawPixel							 	: Std_Logic_Vector(7 downto 0) := X"13";		-- State for drawing a pixel
-	constant ReadPixel							 	: Std_Logic_Vector(7 downto 0) := X"14";		-- State for reading a pixel
-	constant ReadPixel1							 	: Std_Logic_Vector(7 downto 0) := X"15";		-- State for reading a pixel
-	constant ReadPixel2							 	: Std_Logic_Vector(7 downto 0) := X"16";		-- State for reading a pixel
-	constant PalletteReProgram						: Std_Logic_Vector(7 downto 0) := X"17";		-- State for programming a pallette
+	constant DrawRect			 	 					: Std_Logic_Vector(7 downto 0) := X"13";		-- State for drawing any line
+	constant DrawRect1			 	 				: Std_Logic_Vector(7 downto 0) := X"14";		-- State for drawing any line
+	constant DrawRect2			 	 				: Std_Logic_Vector(7 downto 0) := X"15";		-- State for drawing any line
+	constant DrawPixel							 	: Std_Logic_Vector(7 downto 0) := X"16";		-- State for drawing a pixel
+	constant ReadPixel							 	: Std_Logic_Vector(7 downto 0) := X"17";		-- State for reading a pixel
+	constant ReadPixel1							 	: Std_Logic_Vector(7 downto 0) := X"18";		-- State for reading a pixel
+	constant ReadPixel2							 	: Std_Logic_Vector(7 downto 0) := X"19";		-- State for reading a pixel
+	constant PalletteReProgram						: Std_Logic_Vector(7 downto 0) := X"20";		-- State for programming a pallette
 
 	-- add any extra states you need here for example to draw lines etc.
 	
@@ -152,6 +155,7 @@ architecture bhvr of GraphicsController is
 	constant Hline								 		: Std_Logic_Vector(15 downto 0) := X"0001";	-- command to Graphics chip from NIOS is draw Horizontal line
 	constant Vline									 	: Std_Logic_Vector(15 downto 0) := X"0002";	-- command to Graphics chip from NIOS is draw Vertical line
 	constant ALine									 	: Std_Logic_Vector(15 downto 0) := X"0003";	-- command to Graphics chip from NIOS is draw any line
+	constant Rect									 	: Std_Logic_Vector(15 downto 0) := X"0004";	-- command to Graphics chip from NIOS is draw any line
 	constant	PutPixel									: Std_Logic_Vector(15 downto 0) := X"000a";	-- command to Graphics chip from NIOS to draw a pixel
 	constant	GetPixel									: Std_Logic_Vector(15 downto 0) := X"000b";	-- command to Graphics chip from NIOS to read a pixel
 	constant ProgramPallette						: Std_Logic_Vector(15 downto 0) := X"0010";	-- command to Graphics chip from NIOS is program one of the pallettes with a new RGB value
@@ -687,6 +691,8 @@ Begin
 				NextState <= DrawVline;
 			elsif(Command = ALine) then
 				NextState <= DrawLine;	
+			elsif(Command = Rect) then
+				NextState <= DrawRect;	
 				
 			-- add other code to process any new commands here e.g. draw a circle if you decide to implement that
 			-- or draw a rectangle etc
@@ -843,6 +849,59 @@ Begin
       else
         Sig_Y1_Inc <= '1';
         NextState <= DrawVline;
+      end if;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		elsif(CurrentState = DrawRect) then
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			X_Data <= X1;
+			Y_Data <= Y1;
+			Sig_X_Load <= '1';
+			Sig_Y_Load <= '1';
+			NextState <= DrawRect1;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		elsif(CurrentState = DrawRect1) then
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			NextState <= DrawRect2;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		elsif(CurrentState = DrawRect2) then
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      -- This state is responsible for drawing a horizontal line from a X,Y coordinate on the screen
+      -- Your program/NIOS should have written the colour pallette number to the "Colour" register
+      -- and the coords to the x1 and y1 register before writing to the command register with a "Draw H Line" command)
+
+      -- the address of the pixel is formed from the 9 bit y coord that indicates a "row" (1 out of a maximum of 512 rows)
+      -- coupled with a 9 bit x or column address within that row. Note a 9 bit X address is used for a maximum of 1024 columns or horizontal pixels
+      -- You might thing that 10 bits would be required for 1024 columns and you would be correct, except that the address we are issuing
+      -- holds two pixels (the memory us 16 bit wide remember so each location/address is that of 2 pixels)
+
+			Sig_AddressOut 	<= Y(8 downto 0) & X(9 downto 1);				-- 9 bit x address even though it goes up to 1024 which would mean 10 bits, because each address = 2 pixels/bytes
+			Sig_RW_Out			<= '0';													-- we are intending to draw a pixel so set RW to '0' for a write to memory
+
+			if(X(0) = '0')	then														-- if the address/pixel is an even numbered one
+				Sig_UDS_Out_L 	<= '0';													-- enable write to upper half of Sram data bus to access 1 pixel at that location
+			else
+				Sig_LDS_Out_L 	<= '0';													-- else write to lower half of Sram data bus to get the other pixel at that address
+			end if;
+
+			-- the data that we write comes from the default value assigned to Sig_DataOut previously
+			-- you will recall that this is the value of the Colour register
+
+      -- we will then increase X1 and loop
+      if(X >= X2) then
+			if(Y >= Y2) then
+				NextState <= IDLE;
+			else
+				Y_Data <= Y + 1;
+				X_Data <= X1;
+				Sig_Y_Load <= '1';
+				Sig_X_Load <= '1';
+				NextState <= DrawRect2;
+			end if;
+      else
+		  X_Data <= X + 1;
+        Sig_X_Load <= '1';
+        NextState <= DrawRect2;
       end if;
 			
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -17,7 +17,9 @@ entity M68xxIODecoder is
 		Bluetooth_Port_Enable		 	: out std_logic;
 		Bluetooth_Baud_Enable		 	: out std_logic;
 		TouchScreen_Port_Enable		 	: out std_logic;
-		TouchScreen_Baud_Enable		 	: out std_logic
+		TouchScreen_Baud_Enable		 	: out std_logic;
+		RaspPi_Port_Enable			 	: out std_logic;
+		RaspPi_Baud_Enable		 		: out std_logic
 	);
 end ;
 
@@ -42,6 +44,11 @@ Begin
 		
 		TouchScreen_Port_Enable <= '0' ;
 		TouchScreen_Baud_Enable <= '0' ;
+		
+		RaspPi_Port_Enable	<= '0' ;		 
+		RaspPi_Baud_Enable	<= '0' ; 
+		
+		
 		
 -- IOSelect_H is driven logic 1 whenever the CPU outputs an address in the range A31:A0 = hex [8400_0000] to [8400_FFFF]
 -- that is, IOSelect_H is drive logic for all addresses in range [8400_XXXX]. All we have to do for IO chip is decode the XXXX into 
@@ -102,6 +109,22 @@ Begin
 	
 		if(IOSelect_H = '1') then
 			if((Address(15 downto 4) = X"023") and ByteSelect_L = '0') then		-- address = 0x8400_023X
+			    if((Address(3 downto 0) = X"0") OR (Address(3 downto 0) = X"2")) then	-- address = 0x8400_0230 or 0232
+					TouchScreen_Port_Enable <= '1' ;					-- enable the serial ACIA device
+				end if ;
+				
+				if(Address(3 downto 0) = X"4") then	-- enable baud rate generator at address = 0x8400_0234
+					TouchScreen_Baud_Enable <= '1' ;
+				end if ;
+			end if ;
+		end if ;
+		
+-- decoder for the 4th 6850 chip (Touch Screen)- 2 registers at locations 0x8400_0240 and 0x8400_0242 so that they occupy 
+-- same half of data bus on D15-D8 and ByteSelect_L = 0
+-- decoder for the Baud Rate generator at 0x8400_0244 on D15-D8 and ByteSelect_L = 0
+	
+		if(IOSelect_H = '1') then
+			if((Address(15 downto 4) = X"024") and ByteSelect_L = '0') then		-- address = 0x8400_023X
 			    if((Address(3 downto 0) = X"0") OR (Address(3 downto 0) = X"2")) then	-- address = 0x8400_0230 or 0232
 					TouchScreen_Port_Enable <= '1' ;					-- enable the serial ACIA device
 				end if ;

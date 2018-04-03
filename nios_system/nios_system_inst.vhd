@@ -1,5 +1,6 @@
 	component nios_system is
 		port (
+			bass_out_export     : out   std_logic_vector(3 downto 0);                     -- export
 			clk_clk             : in    std_logic                     := 'X';             -- clk
 			hex0_1_export       : out   std_logic_vector(7 downto 0);                     -- export
 			hex2_3_export       : out   std_logic_vector(7 downto 0);                     -- export
@@ -31,47 +32,60 @@
 			sdram_ras_n         : out   std_logic;                                        -- ras_n
 			sdram_we_n          : out   std_logic;                                        -- we_n
 			sdram_clk_clk       : out   std_logic;                                        -- clk
-			switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
 			sound_in_export     : in    std_logic_vector(15 downto 0) := (others => 'X'); -- export
-			sound_out_export    : out   std_logic_vector(15 downto 0)                     -- export
+			sound_out_export    : out   std_logic_vector(15 downto 0);                    -- export
+			switches_export     : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
+			treble_out_export   : out   std_logic_vector(3 downto 0);                     -- export
+			volume_out_export   : out   std_logic_vector(15 downto 0);                    -- export
+			wifi_uart_out_rxd   : in    std_logic                     := 'X';             -- rxd
+			wifi_uart_out_txd   : out   std_logic;                                        -- txd
+			pi_uart_out_rxd     : in    std_logic                     := 'X';             -- rxd
+			pi_uart_out_txd     : out   std_logic                                         -- txd
 		);
 	end component nios_system;
 
 	u0 : component nios_system
 		port map (
-			clk_clk             => CONNECTED_TO_clk_clk,             --          clk.clk
-			hex0_1_export       => CONNECTED_TO_hex0_1_export,       --       hex0_1.export
-			hex2_3_export       => CONNECTED_TO_hex2_3_export,       --       hex2_3.export
-			hex4_5_export       => CONNECTED_TO_hex4_5_export,       --       hex4_5.export
-			io_acknowledge      => CONNECTED_TO_io_acknowledge,      --           io.acknowledge
-			io_irq              => CONNECTED_TO_io_irq,              --             .irq
-			io_address          => CONNECTED_TO_io_address,          --             .address
-			io_bus_enable       => CONNECTED_TO_io_bus_enable,       --             .bus_enable
-			io_byte_enable      => CONNECTED_TO_io_byte_enable,      --             .byte_enable
-			io_rw               => CONNECTED_TO_io_rw,               --             .rw
-			io_write_data       => CONNECTED_TO_io_write_data,       --             .write_data
-			io_read_data        => CONNECTED_TO_io_read_data,        --             .read_data
-			lcd_data_DATA       => CONNECTED_TO_lcd_data_DATA,       --     lcd_data.DATA
-			lcd_data_ON         => CONNECTED_TO_lcd_data_ON,         --             .ON
-			lcd_data_BLON       => CONNECTED_TO_lcd_data_BLON,       --             .BLON
-			lcd_data_EN         => CONNECTED_TO_lcd_data_EN,         --             .EN
-			lcd_data_RS         => CONNECTED_TO_lcd_data_RS,         --             .RS
-			lcd_data_RW         => CONNECTED_TO_lcd_data_RW,         --             .RW
-			leds_export         => CONNECTED_TO_leds_export,         --         leds.export
-			push_buttons_export => CONNECTED_TO_push_buttons_export, -- push_buttons.export
-			reset_reset_n       => CONNECTED_TO_reset_reset_n,       --        reset.reset_n
-			sdram_addr          => CONNECTED_TO_sdram_addr,          --        sdram.addr
-			sdram_ba            => CONNECTED_TO_sdram_ba,            --             .ba
-			sdram_cas_n         => CONNECTED_TO_sdram_cas_n,         --             .cas_n
-			sdram_cke           => CONNECTED_TO_sdram_cke,           --             .cke
-			sdram_cs_n          => CONNECTED_TO_sdram_cs_n,          --             .cs_n
-			sdram_dq            => CONNECTED_TO_sdram_dq,            --             .dq
-			sdram_dqm           => CONNECTED_TO_sdram_dqm,           --             .dqm
-			sdram_ras_n         => CONNECTED_TO_sdram_ras_n,         --             .ras_n
-			sdram_we_n          => CONNECTED_TO_sdram_we_n,          --             .we_n
-			sdram_clk_clk       => CONNECTED_TO_sdram_clk_clk,       --    sdram_clk.clk
-			switches_export     => CONNECTED_TO_switches_export,     --     switches.export
-			sound_in_export     => CONNECTED_TO_sound_in_export,     --     sound_in.export
-			sound_out_export    => CONNECTED_TO_sound_out_export     --    sound_out.export
+			bass_out_export     => CONNECTED_TO_bass_out_export,     --      bass_out.export
+			clk_clk             => CONNECTED_TO_clk_clk,             --           clk.clk
+			hex0_1_export       => CONNECTED_TO_hex0_1_export,       --        hex0_1.export
+			hex2_3_export       => CONNECTED_TO_hex2_3_export,       --        hex2_3.export
+			hex4_5_export       => CONNECTED_TO_hex4_5_export,       --        hex4_5.export
+			io_acknowledge      => CONNECTED_TO_io_acknowledge,      --            io.acknowledge
+			io_irq              => CONNECTED_TO_io_irq,              --              .irq
+			io_address          => CONNECTED_TO_io_address,          --              .address
+			io_bus_enable       => CONNECTED_TO_io_bus_enable,       --              .bus_enable
+			io_byte_enable      => CONNECTED_TO_io_byte_enable,      --              .byte_enable
+			io_rw               => CONNECTED_TO_io_rw,               --              .rw
+			io_write_data       => CONNECTED_TO_io_write_data,       --              .write_data
+			io_read_data        => CONNECTED_TO_io_read_data,        --              .read_data
+			lcd_data_DATA       => CONNECTED_TO_lcd_data_DATA,       --      lcd_data.DATA
+			lcd_data_ON         => CONNECTED_TO_lcd_data_ON,         --              .ON
+			lcd_data_BLON       => CONNECTED_TO_lcd_data_BLON,       --              .BLON
+			lcd_data_EN         => CONNECTED_TO_lcd_data_EN,         --              .EN
+			lcd_data_RS         => CONNECTED_TO_lcd_data_RS,         --              .RS
+			lcd_data_RW         => CONNECTED_TO_lcd_data_RW,         --              .RW
+			leds_export         => CONNECTED_TO_leds_export,         --          leds.export
+			push_buttons_export => CONNECTED_TO_push_buttons_export, --  push_buttons.export
+			reset_reset_n       => CONNECTED_TO_reset_reset_n,       --         reset.reset_n
+			sdram_addr          => CONNECTED_TO_sdram_addr,          --         sdram.addr
+			sdram_ba            => CONNECTED_TO_sdram_ba,            --              .ba
+			sdram_cas_n         => CONNECTED_TO_sdram_cas_n,         --              .cas_n
+			sdram_cke           => CONNECTED_TO_sdram_cke,           --              .cke
+			sdram_cs_n          => CONNECTED_TO_sdram_cs_n,          --              .cs_n
+			sdram_dq            => CONNECTED_TO_sdram_dq,            --              .dq
+			sdram_dqm           => CONNECTED_TO_sdram_dqm,           --              .dqm
+			sdram_ras_n         => CONNECTED_TO_sdram_ras_n,         --              .ras_n
+			sdram_we_n          => CONNECTED_TO_sdram_we_n,          --              .we_n
+			sdram_clk_clk       => CONNECTED_TO_sdram_clk_clk,       --     sdram_clk.clk
+			sound_in_export     => CONNECTED_TO_sound_in_export,     --      sound_in.export
+			sound_out_export    => CONNECTED_TO_sound_out_export,    --     sound_out.export
+			switches_export     => CONNECTED_TO_switches_export,     --      switches.export
+			treble_out_export   => CONNECTED_TO_treble_out_export,   --    treble_out.export
+			volume_out_export   => CONNECTED_TO_volume_out_export,   --    volume_out.export
+			wifi_uart_out_rxd   => CONNECTED_TO_wifi_uart_out_rxd,   -- wifi_uart_out.rxd
+			wifi_uart_out_txd   => CONNECTED_TO_wifi_uart_out_txd,   --              .txd
+			pi_uart_out_rxd     => CONNECTED_TO_pi_uart_out_rxd,     --   pi_uart_out.rxd
+			pi_uart_out_txd     => CONNECTED_TO_pi_uart_out_txd      --              .txd
 		);
 

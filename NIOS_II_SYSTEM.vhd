@@ -54,11 +54,28 @@ ENTITY NIOS_II_SYSTEM IS
 		Sound_in			: in    std_logic_vector(15 downto 0) := (others => '0');
 		Sound_out 		: out   std_logic_vector(15 downto 0);
 		
+		-- Volume 
+		volume_out		: out	  std_logic_vector(15 downto 0)	:= (others => '0');
+		
+		-- Equalizer
+		treble_out		: out	  std_logic_vector(3 downto 0)	:= (others => '1');
+		bass_out		: out	  std_logic_vector(3 downto 0)	:= (others => '0');
+		
 		-- Hex Display
 		Hex0_1			: out   std_logic_vector(7 downto 0) ;
 		Hex2_3			: out   std_logic_vector(7 downto 0) ;
-		Hex4_5			: out   std_logic_vector(7 downto 0) 
-	);
+		Hex4_5			: out   std_logic_vector(7 downto 0) ;
+		
+		-- Wifi uart
+		wifi_uart_RXD : in std_logic;
+		wifi_uart_TXD : out std_logic;
+
+		-- Raspberry Pi uart
+		pi_uart_RXD : in std_logic;
+		pi_uart_TXD : out std_logic
+
+
+		);
 END NIOS_II_SYSTEM;
 
 ARCHITECTURE NIOS_II_SYSTEM_rtl OF NIOS_II_SYSTEM IS
@@ -106,10 +123,26 @@ ARCHITECTURE NIOS_II_SYSTEM_rtl OF NIOS_II_SYSTEM IS
 		-- Push button signals
 		push_buttons_export 	  : in    std_logic_vector(2 downto 0)  := (others => 'X'); -- export
 		
+		-- Volume 
+      volume_out_export 		: out	  std_logic_vector(15 downto 0)	:= (others => '0');
+		
+		-- Equalizer
+		treble_out_export		: out	  std_logic_vector(3 downto 0)	:= (others => '1');
+		bass_out_export		: out	  std_logic_vector(3 downto 0)	:= (others => '0');
+		
 		-- Hex display signals
 		hex0_1_export          : out   std_logic_vector(7 downto 0);                     -- export
 		hex2_3_export          : out   std_logic_vector(7 downto 0);                     -- export
-		hex4_5_export          : out   std_logic_vector(7 downto 0)                    	-- export
+		hex4_5_export          : out   std_logic_vector(7 downto 0);
+
+		--Wifi uart
+		wifi_uart_out_RXD : in std_logic := 'X';
+		wifi_uart_out_TXD : out std_logic;
+	
+		pi_uart_out_RXD : in std_logic := 'X';
+		pi_uart_out_TXD : out std_logic
+		
+		-- export
 	);
 	END COMPONENT;
 	
@@ -161,8 +194,20 @@ BEGIN
 		sound_in_export => Sound_in,
 		sound_out_export => Sound_out,
 		
+		volume_out_export => volume_out,
+		
+		treble_out_export => treble_out,
+		bass_out_export => bass_out,
+		
 		hex0_1_export 			=> Hex0_1,
 		hex2_3_export 			=> Hex2_3,
-		hex4_5_export 			=> Hex4_5
+		hex4_5_export 			=> Hex4_5,
+		
+		wifi_uart_out_RXD => wifi_uart_RXD,
+		wifi_uart_out_TXD => wifi_uart_TXD,
+		
+		pi_uart_out_RXD => pi_uart_RXD,
+		pi_uart_out_TXD => pi_uart_TXD		
+		
 	);
 END NIOS_II_SYSTEM_rtl;

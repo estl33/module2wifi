@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("") File("DE1_SOC_NIOS_time_limited.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("C:/Users/esther86220/Desktop/CurrentCourses/CPEN391/Module1/RealExercise3-Copy-Esther-HardwareDev1/") File("DE1_SOC_NIOS_time_limited.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

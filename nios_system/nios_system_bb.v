@@ -1,5 +1,6 @@
 
 module nios_system (
+	bass_out_export,
 	clk_clk,
 	hex0_1_export,
 	hex2_3_export,
@@ -31,10 +32,17 @@ module nios_system (
 	sdram_ras_n,
 	sdram_we_n,
 	sdram_clk_clk,
-	switches_export,
 	sound_in_export,
-	sound_out_export);	
+	sound_out_export,
+	switches_export,
+	treble_out_export,
+	volume_out_export,
+	wifi_uart_out_rxd,
+	wifi_uart_out_txd,
+	pi_uart_out_rxd,
+	pi_uart_out_txd);	
 
+	output	[3:0]	bass_out_export;
 	input		clk_clk;
 	output	[7:0]	hex0_1_export;
 	output	[7:0]	hex2_3_export;
@@ -66,7 +74,13 @@ module nios_system (
 	output		sdram_ras_n;
 	output		sdram_we_n;
 	output		sdram_clk_clk;
-	input	[9:0]	switches_export;
 	input	[15:0]	sound_in_export;
 	output	[15:0]	sound_out_export;
+	input	[9:0]	switches_export;
+	output	[3:0]	treble_out_export;
+	output	[15:0]	volume_out_export;
+	input		wifi_uart_out_rxd;
+	output		wifi_uart_out_txd;
+	input		pi_uart_out_rxd;
+	output		pi_uart_out_txd;
 endmodule
